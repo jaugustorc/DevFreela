@@ -23,26 +23,25 @@
 4. **Implementação da Camada Entity Framework**:
    - Configurar a camada de persistência utilizando o **Entity Framework** com **MS SQL** rodando no **Docker**.
 
+5. **Estruturação seguindo o Padrão Clean Code**:
+   - Organizar o código de forma clara e limpa, seguindo as boas práticas de **Clean Code**.
+
 ---
 ## Próximas Etapas no Desenvolvimento da DevFreela.API
 
-
-1. **Estruturação seguindo o Padrão Clean Code**:
-   - Organizar o código de forma clara e limpa, seguindo as boas práticas de **Clean Code**.
-
-2. **Aplicação do Padrão CQRS**:
+1. **Aplicação do Padrão CQRS**:
    - Implementar o padrão **CQRS (Command Query Responsibility Segregation)** para separar a leitura e a escrita de dados.
 
-3. **Implementação do Padrão Repository**:
+2. **Implementação do Padrão Repository**:
    - Refinar a arquitetura do código criando repositórios para gerenciar as operações de acesso a dados das entidades (Projects, Skills e Users).
 
-4. **Validação com FluentValidation**:
+3. **Validação com FluentValidation**:
    - Utilizar o **FluentValidation** para realizar a validação das entradas de dados na API.
 
-5. **Testes Unitários e de Integração**:
+4. **Testes Unitários e de Integração**:
    - Desenvolver testes unitários e de integração para garantir a qualidade do código e a correta funcionalidade da aplicação.
 
-6. **Autenticação e Autorização com JWT**:
+5. **Autenticação e Autorização com JWT**:
    - Implementar autenticação e autorização na API utilizando **JWT (JSON Web Tokens)**.
 
 ---
