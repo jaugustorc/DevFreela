@@ -1,7 +1,6 @@
-﻿using DevFreela.API.Entities;
-using DevFreela.API.Models;
-using DevFreela.API.Persistence;
-using Microsoft.AspNetCore.Http;
+﻿using DevFreela.Application.Models;
+using DevFreela.Core.Entities;
+using DevFreela.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevFreela.API.Controllers
@@ -18,10 +17,9 @@ namespace DevFreela.API.Controllers
 
         // GET api/skills
         [HttpGet]
-        public IActionResult GetAll(int page = 0, int size = 3)
+        public IActionResult GetAll()
         {
-            var skills = _context.Skills.Skip(page * size)
-                .Take(size).ToList();
+            var skills = _context.Skills.ToList();
 
             return Ok(skills);
         }
