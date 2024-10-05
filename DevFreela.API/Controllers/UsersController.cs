@@ -11,37 +11,30 @@ namespace DevFreela.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DevFreelaDbContext _context;
-        public UsersController(DevFreelaDbContext context)
+        public UsersController(DevFreelaDbContext context, IUserService service)
         {
             _context = context;
+            _service = service;
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var user = _context.Users
-                .Include(u => u.Skills)
-                    .ThenInclude(u => u.Skill)
-                .SingleOrDefault(u => u.Id == id);
+            var result = _service.GetById(id);
 
-            if (user is null)
+            if (!result.IsSuccess)
             {
-                return NotFound();
+                return BadRequest(result.Message);
             }
 
-            var model = UserViewModel.FromEntity(user);
-
-            return Ok(model);
+            return Ok(result);         
         }
 
         // POST api/users
         [HttpPost]
         public IActionResult Post(CreateUserInputModel model)
         {
-            var user = new User(model.FullName, model.Email, model.BirthDate);
-
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            var result = _service.Insert(model);
 
             return NoContent();
         }
@@ -49,12 +42,14 @@ namespace DevFreela.API.Controllers
         [HttpPost("{id}/skills")]
         public IActionResult PostSkills(int id, UserSkillsInputModel model)
         {
-            var userSkills = model.SkillIds.Select(s => new UserSkill(id, s)).ToList();
+            var result = _service.AddSkill(id,model);
 
-            _context.UserSkills.AddRange(userSkills);
-            _context.SaveChanges();
-
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
             return NoContent();
+
         }
 
         [HttpPut("{id}/profile-picture")]

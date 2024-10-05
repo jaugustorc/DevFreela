@@ -10,28 +10,27 @@ namespace DevFreela.API.Controllers
     public class SkillsController : ControllerBase
     {
         private readonly DevFreelaDbContext _context;
-        public SkillsController(DevFreelaDbContext context)
+        private readonly IProjectService _service;
+        public SkillsController(DevFreelaDbContext context,  ISkillService service)
         {
             _context = context;
+            _service = service;
         }
 
         // GET api/skills
         [HttpGet]
         public IActionResult GetAll()
         {
-            var skills = _context.Skills.ToList();
+            var result = _service.GetAll();
 
-            return Ok(skills);
+            return Ok(result);
         }
 
         // POST api/skills
         [HttpPost]
         public IActionResult Post(CreateSkillInputModel model)
         {
-            var skill = new Skill(model.Description);
-
-            _context.Skills.Add(skill);
-            _context.SaveChanges();
+            var skill = _service.Insert(model);
 
             return NoContent();
         }
