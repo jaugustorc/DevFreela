@@ -1,4 +1,5 @@
-﻿using DevFreela.Application.Commands.InsertProject;
+﻿using DevFreela.Application.Commands.AddUserSkill;
+using DevFreela.Application.Commands.InsertProject;
 using DevFreela.Application.Models;
 using DevFreela.Application.Services;
 using MediatR;
@@ -32,6 +33,7 @@ namespace DevFreela.Application
                 config.RegisterServicesFromAssemblyContaining<InsertProjectCommand>());
 
             services.AddTransient<IPipelineBehavior<InsertProjectCommand, ResultViewModel<int>>, ValidateInsertProjectCommandBehavior>();
+            services.AddTransient<IPipelineBehavior<AddUserSkillCommand, ResultViewModel<int>>, ValidateAddUserSkillCommandBehavior>();
 
             return services;
         }
