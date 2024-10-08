@@ -20,27 +20,28 @@
 3. **Documentação Acessível**:
    - A documentação da API está sendo desenvolvida e pode ser acessada via **Swagger**, facilitando futuras integrações.
 
----
-## Próximas Etapas no Desenvolvimento da DevFreela.API
-1. **Implementação da Camada Entity Framework**:
+4. **Implementação da Camada Entity Framework**:
    - Configurar a camada de persistência utilizando o **Entity Framework** com **MS SQL** rodando no **Docker**.
 
-2. **Estruturação seguindo o Padrão Clean Code**:
+5. **Estruturação seguindo o Padrão Clean Code**:
    - Organizar o código de forma clara e limpa, seguindo as boas práticas de **Clean Code**.
 
-3. **Aplicação do Padrão CQRS**:
+---
+## Próximas Etapas no Desenvolvimento da DevFreela.API
+
+1. **Aplicação do Padrão CQRS**:
    - Implementar o padrão **CQRS (Command Query Responsibility Segregation)** para separar a leitura e a escrita de dados.
 
-4. **Implementação do Padrão Repository**:
+2. **Implementação do Padrão Repository**:
    - Refinar a arquitetura do código criando repositórios para gerenciar as operações de acesso a dados das entidades (Projects, Skills e Users).
 
-5. **Validação com FluentValidation**:
+3. **Validação com FluentValidation**:
    - Utilizar o **FluentValidation** para realizar a validação das entradas de dados na API.
 
-6. **Testes Unitários e de Integração**:
+4. **Testes Unitários e de Integração**:
    - Desenvolver testes unitários e de integração para garantir a qualidade do código e a correta funcionalidade da aplicação.
 
-7. **Autenticação e Autorização com JWT**:
+5. **Autenticação e Autorização com JWT**:
    - Implementar autenticação e autorização na API utilizando **JWT (JSON Web Tokens)**.
 
 ---
