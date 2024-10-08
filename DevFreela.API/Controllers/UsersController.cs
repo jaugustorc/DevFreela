@@ -1,13 +1,8 @@
 ﻿using DevFreela.Application.Commands.AddUserSkill;
 using DevFreela.Application.Commands.InsertUser;
-using DevFreela.Application.Models;
 using DevFreela.Application.Queries.GetProjectById;
-using DevFreela.Application.Services;
-using DevFreela.Core.Entities;
-using DevFreela.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DevFreela.API.Controllers
 {
@@ -15,11 +10,11 @@ namespace DevFreela.API.Controllers
     [Route("api/users")]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _service;
+
         private readonly IMediator _mediator;
-        public UsersController(IUserService service, IMediator mediator)
+        public UsersController(IMediator mediator)
         {
-            _service = service;
+
             _mediator = mediator;
         }
 
