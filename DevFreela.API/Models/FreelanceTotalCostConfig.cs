@@ -1,4 +1,4 @@
-﻿namespace DevFreela.Application.Models
+﻿namespace DevFreela.API.Models
 {
     public class FreelanceTotalCostConfig
     {
