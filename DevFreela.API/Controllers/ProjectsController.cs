@@ -1,7 +1,7 @@
-﻿using DevFreela.Application.Models;
-using DevFreela.Application.Services;
-using DevFreela.Infrastructure.Persistence;
+﻿using DevFreela.API.Models;
+using DevFreela.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace DevFreela.API.Controllers
 {
@@ -9,57 +9,49 @@ namespace DevFreela.API.Controllers
     [Route("api/projects")]
     public class ProjectsController : ControllerBase
     {
-        private readonly DevFreelaDbContext _context;
-        private readonly IProjectService _service;
-        public ProjectsController(DevFreelaDbContext context, IProjectService service)
+        private readonly FreelanceTotalCostConfig _config;
+        private readonly IConfigService _configService;
+        public ProjectsController(
+            IOptions<FreelanceTotalCostConfig> options,
+            IConfigService configService)
         {
-            _context = context;
-            _service = service;
+            _config = options.Value;
+            _configService = configService;
+
         }
 
         // GET api/projects?search=crm
         [HttpGet]
         public IActionResult Get(string search = "")
         {
-            var result = _service.GetAll();
-
-            return Ok(result);
+            return Ok(_configService.GetValue());
         }
 
         // GET api/projects/1234
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var result = _service.GetById(id);
+            throw new Exception();
 
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Message);
-            }
-
-            return Ok(result);
+            return Ok();
         }
 
         // POST api/projects
         [HttpPost]
         public IActionResult Post(CreateProjectInputModel model)
         {
-            var result = _service.Insert(model);
+            if (model.TotalCost < _config.Minimum || model.TotalCost > _config.Maximum)
+            {
+                return BadRequest("Numero fora dos limites.");
+            }
 
-             return CreatedAtAction(nameof(GetById), new { id = result.Data }, model);
+            return CreatedAtAction(nameof(GetById), new { id = 1 }, model);
         }
 
         // PUT api/projects/1234
         [HttpPut("{id}")]
         public IActionResult Put(int id, UpdateProjectInputModel model)
         {
-            var result = _service.Update(model);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Message);
-            }
-
             return NoContent();
         }
 
@@ -67,13 +59,6 @@ namespace DevFreela.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var result = _service.Delete(id);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Message);
-            }
-
             return NoContent();
         }
 
@@ -81,13 +66,6 @@ namespace DevFreela.API.Controllers
         [HttpPut("{id}/start")]
         public IActionResult Start(int id)
         {
-            var result = _service.Start(id);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Message);
-            }
-
             return NoContent();
         }
 
@@ -95,13 +73,6 @@ namespace DevFreela.API.Controllers
         [HttpPut("{id}/complete")]
         public IActionResult Complete(int id)
         {
-            var result = _service.Complete(id);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Message);
-            }
-
             return NoContent();
         }
 
@@ -109,14 +80,7 @@ namespace DevFreela.API.Controllers
         [HttpPost("{id}/comments")]
         public IActionResult PostComment(int id, CreateProjectCommentInputModel model)
         {
-            var result = _service.InsertComment(id, model);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Message);
-            }
-
-            return NoContent();
+            return Ok();
         }
     }
 }
