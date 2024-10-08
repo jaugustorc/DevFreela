@@ -19,7 +19,7 @@ namespace DevFreela.Application.Services
                 .Include(p => p.Description)
                 .Where(p => !p.IsDeleted).ToList();
 
-            var model = skills.Select(ProjectItemViewModel.FromEntity).ToList();
+            var model = skills.Select(SkillItemViewModel.FromEntity).ToList();
 
             return ResultViewModel<List<SkillItemViewModel>>.Success(model);
         }

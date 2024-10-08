@@ -1,4 +1,5 @@
 ﻿using DevFreela.Application.Models;
+using DevFreela.Application.Services;
 using DevFreela.Core.Entities;
 using DevFreela.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ namespace DevFreela.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DevFreelaDbContext _context;
+        private readonly IUserService _service;
         public UsersController(DevFreelaDbContext context, IUserService service)
         {
             _context = context;

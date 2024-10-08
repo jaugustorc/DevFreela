@@ -1,4 +1,5 @@
 ﻿using DevFreela.Application.Models;
+using DevFreela.Application.Services;
 using DevFreela.Core.Entities;
 using DevFreela.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace DevFreela.API.Controllers
     public class SkillsController : ControllerBase
     {
         private readonly DevFreelaDbContext _context;
-        private readonly IProjectService _service;
+        private readonly ISkillService _service;
         public SkillsController(DevFreelaDbContext context,  ISkillService service)
         {
             _context = context;

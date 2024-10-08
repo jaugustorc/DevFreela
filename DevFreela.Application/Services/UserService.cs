@@ -16,10 +16,9 @@ namespace DevFreela.Application.Services
         
         public ResultViewModel<UserViewModel> GetById(int id)
         {
-            var user = _context.User
-                .Include(p => p.FullName)
-                .Include(p => p.Email)
+            var user = _context.Users
                 .Include(p => p.Skills)
+                .ThenInclude(u => u.Skill)
                 .SingleOrDefault(p => p.Id == id);
 
             if (user is null)
@@ -36,13 +35,13 @@ namespace DevFreela.Application.Services
         {
             var project = model.ToEntity();
 
-            _context.Projects.Add(project);
+            _context.Users.Add(project);
             _context.SaveChanges();
 
             return ResultViewModel.Success();
         }
 
-        ResultViewModel AddSkill(int id, UserSkillsInputModel model)
+        public ResultViewModel AddSkill(int id, UserSkillsInputModel model)
         {
             // Usuário existe ?
             var result = this.GetById(id);
