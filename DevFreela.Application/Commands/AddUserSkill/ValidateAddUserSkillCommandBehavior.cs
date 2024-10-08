@@ -1,28 +1,26 @@
 ﻿using DevFreela.Application.Models;
-using DevFreela.Infrastructure.Persistence;
+using DevFreela.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevFreela.Application.Commands.AddUserSkill
 {
     class ValidateAddUserSkillCommandBehavior :
         IPipelineBehavior<AddUserSkillCommand, ResultViewModel<int>>
     {
-        private readonly DevFreelaDbContext _context;
-        public ValidateAddUserSkillCommandBehavior(DevFreelaDbContext context)
+
+        private readonly IUsersRepository _repository;
+        private readonly ISkillsRepository _repositorySkill;
+        public ValidateAddUserSkillCommandBehavior(IUsersRepository repository, ISkillsRepository repositorySkill)
         {
-            _context = context;
+            this._repository = repository;
+            this._repositorySkill = repositorySkill;
         }
 
         public async Task<ResultViewModel<int>> Handle(AddUserSkillCommand request, RequestHandlerDelegate<ResultViewModel<int>> next, CancellationToken cancellationToken)
         {
-            var clientExists = _context.Users.Any(u => u.Id == request.Id);
+            bool clientExists = await _repository.Exists(request.Id);
 
-            var skillsExists = request.SkillIds.All(skillId => _context.Skills.Any(s => s.Id == skillId));
+            bool skillsExists = await _repositorySkill.Exists(request.SkillIds);
 
             if (!clientExists || !skillsExists)
             {

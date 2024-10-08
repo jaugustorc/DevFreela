@@ -1,27 +1,25 @@
 ﻿using DevFreela.Application.Models;
-using DevFreela.Infrastructure.Persistence;
+using DevFreela.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevFreela.Application.Commands.InsertProject
 {
     public class ValidateInsertProjectCommandBehavior :
         IPipelineBehavior<InsertProjectCommand, ResultViewModel<int>>
     {
-        private readonly DevFreelaDbContext _context;
-        public ValidateInsertProjectCommandBehavior(DevFreelaDbContext context)
+        
+        private readonly IUsersRepository _repository;
+
+        public ValidateInsertProjectCommandBehavior(IUsersRepository repository)
         {
-            _context = context;
+            _repository = repository;
+            
         }
 
         public async Task<ResultViewModel<int>> Handle(InsertProjectCommand request, RequestHandlerDelegate<ResultViewModel<int>> next, CancellationToken cancellationToken)
         {
-            var clientExists = _context.Users.Any(u => u.Id == request.IdClient);
-            var freelancerExists = _context.Users.Any(u => u.Id == request.IdFreelancer);
+            var clientExists = await _repository.Exists(request.IdClient);
+            var freelancerExists = await _repository.Exists(request.IdFreelancer);
 
             if (!clientExists || !freelancerExists)
             {

@@ -1,7 +1,6 @@
 ﻿using DevFreela.Application.Models;
-using DevFreela.Infrastructure.Persistence;
+using DevFreela.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace DevFreela.Application.Queries.GetProjectById
 {
@@ -17,25 +16,22 @@ namespace DevFreela.Application.Queries.GetProjectById
 
     public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, ResultViewModel<UserViewModel>>
     {
-        private readonly DevFreelaDbContext _context;
-        public GetUserByIdHandler(DevFreelaDbContext context)
+        private readonly IUsersRepository _repository;
+        public GetUserByIdHandler(IUsersRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public async Task<ResultViewModel<UserViewModel>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            var project = await _context.Users
-                .Include(p => p.Skills)
-                .ThenInclude(u => u.Skill)
-                .SingleOrDefaultAsync(p => p.Id == request.Id);
-
-            if (project is null)
+            var user = await _repository.GetById(request.Id); 
+             
+            if (user is null)
             {
                 return ResultViewModel<UserViewModel>.Error("Usuário não existe.");
             }
 
-            var model = UserViewModel.FromEntity(project);
+            var model = UserViewModel.FromEntity(user);
 
             return ResultViewModel<UserViewModel>.Success(model);
         }
