@@ -1,4 +1,5 @@
-﻿using DevFreela.Application.Models;
+﻿using DevFreela.Application.Commands.InsertUser;
+using DevFreela.Application.Models;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DevFreela.Application.Validators
 {
-    public class CreateUserValidator : AbstractValidator<CreateUserInputModel>
+    public class InsertUserValidator : AbstractValidator<InsertUserCommand>
     {
-        public CreateUserValidator()
+        public InsertUserValidator()
         {
             RuleFor(u => u.Email)
                 .EmailAddress()

@@ -29,6 +29,24 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
             return exist;
         }
 
+        public async Task<bool> Exists(int skill)
+        {
+            try
+            {
+
+
+                return await _context.Users.AsNoTracking().AnyAsync(p => p.Id == skill);
+
+            }
+
+            catch (Exception ex)
+            {
+                // Log da exceção
+                // ex.Message ou ex.StackTrace podem ajudar a identificar problemas
+                throw new Exception("Database query failed", ex);
+            }
+        }
+
         public async Task<List<Skill>> GetAll()
         {
             var skills = await _context.Skills
