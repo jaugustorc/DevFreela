@@ -1,5 +1,9 @@
 ﻿using DevFreela.Application.Commands.AddUserSkill;
+using DevFreela.Application.Commands.InsertComment;
 using DevFreela.Application.Commands.InsertProject;
+using DevFreela.Application.Commands.InsertSkill;
+using DevFreela.Application.Commands.InsertUser;
+using DevFreela.Application.Commands.UpdateProject;
 using DevFreela.Application.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -35,7 +39,12 @@ namespace DevFreela.Application
         {
             services
                 .AddFluentValidationAutoValidation()
-                .AddValidatorsFromAssemblyContaining<InsertProjectCommand>();
+                .AddValidatorsFromAssemblyContaining<AddUserSkillCommand>()
+                .AddValidatorsFromAssemblyContaining<InsertCommentCommand>()
+                .AddValidatorsFromAssemblyContaining<InsertProjectCommand>()
+                .AddValidatorsFromAssemblyContaining<InsertSkillCommand>()
+                .AddValidatorsFromAssemblyContaining<InsertUserCommand>()
+                .AddValidatorsFromAssemblyContaining<UpdateProjectCommand>();
 
             return services;
         }

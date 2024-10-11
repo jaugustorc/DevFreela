@@ -365,3 +365,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 DevFreela.API/appsettings.json
+DevFreela.API/appsettings.json
