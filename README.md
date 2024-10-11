@@ -25,23 +25,24 @@
 
 5. **Estruturação seguindo o Padrão Clean Code**:
    - Organizar o código de forma clara e limpa, seguindo as boas práticas de **Clean Code**.
+  
+6. **Aplicação do Padrão CQRS**:
+   - Implementar o padrão **CQRS (Command Query Responsibility Segregation)** para separar a leitura e a escrita de dados.
+
+7. **Implementação do Padrão Repository**:
+   - Refinar a arquitetura do código criando repositórios para gerenciar as operações de acesso a dados das entidades (Projects, Skills e Users).
+
+8. **Validação com FluentValidation**:
+   - Utilizar o **FluentValidation** para realizar a validação das entradas de dados na API.
+
 
 ---
 ## Próximas Etapas no Desenvolvimento da DevFreela.API
 
-1. **Aplicação do Padrão CQRS**:
-   - Implementar o padrão **CQRS (Command Query Responsibility Segregation)** para separar a leitura e a escrita de dados.
-
-2. **Implementação do Padrão Repository**:
-   - Refinar a arquitetura do código criando repositórios para gerenciar as operações de acesso a dados das entidades (Projects, Skills e Users).
-
-3. **Validação com FluentValidation**:
-   - Utilizar o **FluentValidation** para realizar a validação das entradas de dados na API.
-
-4. **Testes Unitários e de Integração**:
+1. **Testes Unitários e de Integração**:
    - Desenvolver testes unitários e de integração para garantir a qualidade do código e a correta funcionalidade da aplicação.
 
-5. **Autenticação e Autorização com JWT**:
+2. **Autenticação e Autorização com JWT**:
    - Implementar autenticação e autorização na API utilizando **JWT (JSON Web Tokens)**.
 
 ---
