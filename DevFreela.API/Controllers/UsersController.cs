@@ -1,13 +1,16 @@
-﻿using DevFreela.Application.Commands.AddUserSkill;
+﻿using DevFreela.Application.Commands;
+using DevFreela.Application.Commands.AddUserSkill;
 using DevFreela.Application.Commands.InsertUser;
 using DevFreela.Application.Queries.GetProjectById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevFreela.API.Controllers
 {
     [ApiController]
     [Route("api/users")]
+    [Authorize]
     public class UsersController : ControllerBase
     {
 
@@ -33,6 +36,7 @@ namespace DevFreela.API.Controllers
 
         // POST api/users
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Post(InsertUserCommand command)
         {
             var result = await _mediator.Send(command);
@@ -46,6 +50,7 @@ namespace DevFreela.API.Controllers
         }
 
         [HttpPost("{id}/skills")]
+        [Authorize(Roles = "freelancer")]
         public async Task<IActionResult> PostSkills(int id, AddUserSkillCommand command)
         {
             var result = await _mediator.Send(command);
@@ -67,6 +72,21 @@ namespace DevFreela.API.Controllers
             // Processar a imagem
 
             return Ok(description);
+        }
+
+        // api/users/login
+        [HttpPut("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (result == null)
+            {
+                return this.BadRequest(result.Message);
+            }
+
+            return this.Ok(result);
         }
     }
 }

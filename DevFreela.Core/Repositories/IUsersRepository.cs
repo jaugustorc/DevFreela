@@ -9,6 +9,7 @@ namespace DevFreela.Core.Repositories
         Task<int> Add(User user);
         Task<bool> Exists(int id);
         Task AddUserSkill(List<UserSkill> userSkills);
+        Task<User?> GetUserByEmailAndPasswordAsync(string email, string passwordHash);
 
     }
 }
