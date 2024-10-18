@@ -6,7 +6,7 @@ using NSubstitute;
 
 namespace DevFreela.UnitTests.Application.Commands
 {
-    public class CreateProjectCommandHandlerTests
+    public class InsertProjectCommandHandlerTests
     {
         [Fact]
         public async Task InputDataIsOk_Executed_ReturnProjectId()

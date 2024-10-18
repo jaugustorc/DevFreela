@@ -5,6 +5,7 @@
         public Skill(string description) : base()
         {
             Description = description;
+            UserSkills = [];
         }
 
         public string Description { get; private set; }
