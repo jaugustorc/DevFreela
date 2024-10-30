@@ -35,15 +35,14 @@
 8. **Validação com FluentValidation**:
    - Utilizar o **FluentValidation** para realizar a validação das entradas de dados na API.
 
+9. **Autenticação e Autorização com JWT**:
+   - Implementar autenticação e autorização na API utilizando **JWT (JSON Web Tokens)**.
 
 ---
 ## Próximas Etapas no Desenvolvimento da DevFreela.API
 
 1. **Testes Unitários e de Integração**:
    - Desenvolver testes unitários e de integração para garantir a qualidade do código e a correta funcionalidade da aplicação.
-
-2. **Autenticação e Autorização com JWT**:
-   - Implementar autenticação e autorização na API utilizando **JWT (JSON Web Tokens)**.
 
 ---
 
